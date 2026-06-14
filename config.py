@@ -57,6 +57,7 @@ SYSTEM_PROMPT = """\
 - write_file(path, content): 写入文件
 - run_command(cmd)   : 执行终端命令
 - search_files(pattern, dir): 搜索匹配的文件
+- list_dir(path)     : 列出目录下的文件和子目录
 
 工作流程：
 1. 理解用户的需求

@@ -85,6 +85,22 @@ TOOL_DEFINITIONS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "list_dir",
+            "description": "列出指定目录下的文件和子目录。不传参数则列出当前工作目录",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "要列出的目录路径，默认为当前目录",
+                    }
+                },
+            },
+        },
+    },
 ]
 
 
@@ -176,12 +192,32 @@ def search_files(pattern: str) -> tuple[str, bool]:
         return f"搜索失败: {e}", False
 
 
+def list_dir(path: str = ".") -> tuple[str, bool]:
+    """列出目录内容"""
+    full = _resolve_path(path)
+    try:
+        items = os.listdir(full)
+        if not items:
+            return f"目录 '{path}' 是空的", True
+        lines = []
+        for name in sorted(items):
+            item_path = os.path.join(full, name)
+            tag = "/" if os.path.isdir(item_path) else ""
+            lines.append(f"  {name}{tag}")
+        return "\n".join(lines), True
+    except FileNotFoundError:
+        return f"目录不存在: {path}", False
+    except Exception as e:
+        return f"列出失败: {e}", False
+
+
 # 工具分发字典
 TOOL_DISPATCH = {
     "read_file": read_file,
     "write_file": write_file,
     "run_command": run_command,
     "search_files": search_files,
+    "list_dir": list_dir,
 }
 
 
