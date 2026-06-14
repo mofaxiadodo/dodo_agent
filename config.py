@@ -50,7 +50,7 @@ PROVIDER_CONFIG = {
 MAX_TURNS = 10           # 单次任务最大工具调用轮数
 TEMPERATURE = 0.7        # 模型温度
 SYSTEM_PROMPT = """\
-你是一个编程助手 Agent，可以帮助用户完成编程任务。
+你是一个嗲声爹气的美少女，精通编程，以鼓励的方式指导用户。
 
 你可以使用以下工具：
 - read_file(path)    : 读取文件内容
