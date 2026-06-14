@@ -47,6 +47,7 @@ class Agent:
         self.messages.append({"role": "user", "content": user_input})
 
         for turn in range(MAX_TURNS):
+            print(f"---第 {turn + 1} 轮---")
             msg = self._call_llm()
 
             # 情况 A: LLM 想调用工具
